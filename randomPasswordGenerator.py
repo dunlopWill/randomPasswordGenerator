@@ -1,13 +1,11 @@
 import random
 import string
 
-no = {"N", "No", "n", "no", "Nope", "nope"}
-print("Hello, I am a random password generator!")
-
 #Obtain password length
 passwordLength = int(input("How many characters would like your password to be?\n"))
 print("Okay, your password will be " + str(passwordLength) + " characters long!")
 
+#Set characters to include in password
 includeLower = True
 includeUpper = True
 includeNumbers = True
