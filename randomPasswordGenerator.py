@@ -1,66 +1,48 @@
 import random
 import string
 
-yes = {"Y", "Yes", "y", "yes", "Yeah", "yeah"}
-
 no = {"N", "No", "n", "no", "Nope", "nope"}
-
 print("Hello, I am a random password generator!")
 
-passwordlength = int(input("How many characters would like your password to be?\n"))
-print("Okay, your password will be " + str(passwordlength) + " characters long!")
+#Obtain password length
+passwordLength = int(input("How many characters would like your password to be?\n"))
+print("Okay, your password will be " + str(passwordLength) + " characters long!")
 
-includelower = str(input("Would you like to include LOWER case letters in your password? (Yes/No)"))
-if includelower == yes:
-    True
-if includelower == no:
-    False
+includeLower = True
+includeUpper = True
+includeNumbers = True
+includePunct = True
 
-includeupper = str(input("Would you like to include UPPER case letters in your password? (Yes/No)"))
-if includeupper == yes:
-    True
-if includeupper == no:
-    False
+def password(n):
+    if includeLower and not includeUpper and not includeNumbers and not includePunct:
+        print("".join(random.choice(string.ascii_lowercase) for i in range(n)))
+    elif includeLower and includeUpper and not includeNumbers and not includePunct:
+        print("".join(random.choice(string.ascii_lowercase + string.ascii_uppercase) for i in range(n)))
+    elif includeLower and includeNumbers and not includeUpper and not includePunct:
+        print("".join(random.choice(string.ascii_lowercase + string.digits) for i in range(n)))
+    elif includeLower and includePunct and not includeUpper and not includeNumbers:
+        print("".join(random.choice(string.ascii_lowercase + string.punctuation) for i in range(n)))
+    elif includeLower and includeUpper and includeNumbers and not includePunct:
+        print("".join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for i in range(n)))
+    elif includeLower and includeUpper and includePunct and not includeNumbers:
+        print("".join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.punctuation) for i in range(n)))
+    elif includeLower and includeNumbers and includePunct and not includeUpper:
+        print("".join(random.choice(string.ascii_lowercase + string.digits + string.punctuation) for i in range(n)))
+    elif includeLower and includeUpper and includeNumbers and includePunct:
+        print("".join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for i in range(n)))
+    elif includeUpper and not includeLower and not includeNumbers and not includePunct:
+        print("".join(random.choice(string.ascii_uppercase) for i in range(n)))
+    elif includeUpper and includeNumbers and not includeLower and not includePunct:
+        print("".join(random.choice(string.ascii_uppercase + string.digits) for i in range(n)))
+    elif includeUpper and includePunct and not includeLower and not includeNumbers:
+        print("".join(random.choice(string.ascii_uppercase + string.punctuation) for i in range(n)))
+    elif includeUpper and includeNumbers and includePunct and not includeLower:
+        print("".join(random.choice(string.ascii_uppercase + string.digits + string.punctuation) for i in range(n)))
+    elif includeNumbers and not includeLower and not includeUpper and not includePunct:
+        print("".join(random.choice(string.digits) for i in range(n)))
+    elif includeNumbers and includePunct and not includeLower and not includeUpper:
+        print("".join(random.choice(string.digits + string.punctuation) for i in range(n)))
+    elif includePunct and not includeLower and not includeUpper and not includeNumbers:
+        print("".join(random.choice(string.punctuation) for i in range(n)))
 
-includenumbers = str(input("Would you like to include NUMBERS in your password? (Yes/No)"))
-if includenumbers == yes:
-    True
-if includenumbers == no:
-    False
-
-includepunct = str(input("Would you like to include SPECIAL CHARACTERS (e.g. punctuation) in your password? (Yes/No)"))
-if includepunct == yes:
-    True
-if includepunct == no:
-    False
-
-def poorpassword(passwordlength1=int(passwordlength)):
-    lowerletters = string.ascii_lowercase
-    return "".join(random.choice(lowerletters) for i in range(passwordlength1))
-
-def weakpassword(passwordlength1=int(passwordlength)):
-    lowerletters = string.ascii_lowercase
-    upperletter = string.ascii_uppercase
-    return "".join(random.choice(lowerletters + upperletter) for i in range(passwordlength1))
-
-def moderatepassword(passwordlength1=int(passwordlength)):
-    lowerletters = string.ascii_lowercase
-    upperletter = string.ascii_uppercase
-    includenumbers = string.digits
-    return "".join(random.choice(lowerletters + upperletter + includenumbers) for i in range(passwordlength1))
-
-def reasonablepassword(passwordlength1=int(passwordlength)):
-    lowerletters = string.ascii_lowercase
-    upperletter = string.ascii_uppercase
-    includenumbers = string.digits
-    includepunct = string.punctuation
-    return "".join(random.choice(lowerletters + upperletter + includenumbers + includepunct) for i in range(passwordlength1))
-
-if includelower and includeupper and includenumbers and includepunct:
-    print("Your reasonably secure password is " + reasonablepassword()),
-elif includelower and includeupper and includenumbers and not(includepunct):
-    print("Your moderately secure password is " + moderatepassword()),
-elif includelower and includeupper and not(includenumbers) and not(includepunct):
-    print("Since your password is not complex, its security level is rated WEAK. It is " + weakpassword()),
-elif includelower and not(includeupper) and not(includenumbers) and not(includepunct):
-    print("Since your password is not complex, its security level is rated POOR. It is" + poorpassword())
+password(passwordLength)
